@@ -90,7 +90,7 @@ class RWWauthor(object):
                 posts.append(link)
 
         # Reverse ordering for chronological tweeting; only up to [P] posts.
-        return posts[::-1][:POST_LIMIT]
+        return posts[:POST_LIMIT][::-1]
 
     def _tweet_post(self, url):
         """
