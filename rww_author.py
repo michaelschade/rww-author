@@ -140,7 +140,7 @@ class RWWauthor(object):
 if __name__ == '__main__':
     import daemon
 
-    with daemon.DaemonContext():
+    if daemon.DaemonContext():
         rww = RWWauthor()
         rww.update()
 
