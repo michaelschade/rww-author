@@ -1,3 +1,4 @@
+from __future__ import with_statement
 from   settings import *
 import tweepy
 
@@ -140,7 +141,7 @@ class RWWauthor(object):
 if __name__ == '__main__':
     import daemon
 
-    if daemon.DaemonContext():
+    with daemon.DaemonContext():
         rww = RWWauthor()
         rww.update()
 
