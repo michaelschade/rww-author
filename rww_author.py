@@ -40,8 +40,8 @@ class RWWauthor(object):
             dfile = open(self.data_file, 'rb')
             data            = pickle.load(dfile)
         except:
-            self.etag       = ''
-            self.last_post  = ''
+            self.etag       = None
+            self.last_post  = None
         else:
             self.etag       = data['etag']
             self.last_post  = data['last_post']
@@ -122,15 +122,18 @@ class RWWauthor(object):
 
         # If there are any posts, note most recen
         if posts:
+            # Only post if a previous post was detected, otherwise just set
+            # a last post
+            if self.last_post is not None:
+                self._twitter_auth()
+
+                for post in posts:
+                    self._tweet_post(post)
+
+                    # Delay in between tweets to avoid any trouble
+                    from time import sleep
+                    sleep(TWEET_DELAY)
             self.last_post = posts[-1]
-            self._twitter_auth()
-
-        for post in posts:
-            self._tweet_post(post)
-
-            # Delay in between tweets to avoid any trouble
-            from time import sleep
-            sleep(TWEET_DELAY)
 
         self._save()
 
