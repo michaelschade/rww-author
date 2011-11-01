@@ -142,8 +142,8 @@ if __name__ == '__main__':
     import daemon
 
     with daemon.DaemonContext():
+        rww = RWWauthor()
         while True:
-            rww = RWWauthor()
             rww.update()
 
             # Delay in between checking for new posts
