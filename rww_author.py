@@ -109,7 +109,11 @@ class RWWauthor(object):
 
         # "Post Title by @author via @via"
         tweet_text = "%(data-text)s %(data-url)s via @%(data-via)s" % tdata
-        self.twitter.update_status(tweet_text)
+        from tweepy.error import TweepError
+        try:
+            self.twitter.update_status(tweet_text)
+        except TweepError, e: # Problem tweeting; let's move on
+            pass
 
     def update(self):
         """
