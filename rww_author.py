@@ -102,17 +102,21 @@ class RWWauthor(object):
         from lxml.html  import document_fromstring
         content = urlopen(url).read()
         html    = document_fromstring(content)
-        phead   = html.get_element_by_id('metadata_digg_left')
-        tweet   = phead.xpath('div/div[@class="share-tweet-mini"]/a')[0]
-        tdata   = dict(tweet.items())
-
-        # "Post Title by @author via @via"
-        tweet_text = "%(data-text)s %(data-url)s via @%(data-via)s" % tdata
-        from tweepy.error import TweepError
         try:
-            self.twitter.update_status(tweet_text)
-        except TweepError, e: # Problem tweeting; let's move on
+            phead   = html.get_element_by_id('metadata_digg_left')
+            tweet   = phead.xpath('div/div[@class="share-tweet-mini"]/a')[0]
+        except KeyError:
             pass
+        else:
+            tdata   = dict(tweet.items())
+
+            # "Post Title by @author via @via"
+            tweet_text = "%(data-text)s %(data-url)s via @%(data-via)s" % tdata
+            from tweepy.error import TweepError
+            try:
+                self.twitter.update_status(tweet_text)
+            except TweepError, e: # Problem tweeting; let's move on
+                pass
 
     def update(self):
         """
