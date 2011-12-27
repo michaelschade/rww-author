@@ -1,4 +1,3 @@
-from __future__ import with_statement
 from   settings import *
 import tweepy
 
@@ -143,13 +142,10 @@ class RWWauthor(object):
         self._save()
 
 if __name__ == '__main__':
-    import daemon
+    from time import sleep
+    rww = RWWauthor()
+    while True:
+        rww.update()
 
-    with daemon.DaemonContext():
-        rww = RWWauthor()
-        while True:
-            rww.update()
-
-            # Delay in between checking for new posts
-            from time import sleep
-            sleep(POST_DELAY)
+        # Delay in between checking for new posts
+        sleep(POST_DELAY)
