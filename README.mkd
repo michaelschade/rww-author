@@ -1,5 +1,5 @@
 Created by [Michael Schade](http://mschade.me/)
-([@michaelschade](http://twitter.com/intent/user?screen_name=michaelschade)).
+([@sch](http://twitter.com/intent/user?screen_name=sch)).
 
 Introduction
 ============
@@ -17,15 +17,16 @@ Usage
 
 If you are wanting to see the author's posts as well, then you're in luck!
 **All you have to do is follow or list**
-@[RWWauthor](http://twitter.com/intent/user?screen_name=rwwauthor).
+@[RWWauthor](http://twitter.com/intent/user?screen_name=RWWauthor).
 
 This code is otherwise kept here just to add to the open source community and
 perhaps let others build upon the idea (hint: push requests are welcome!) or
 simply learn from it.
 
 For those wanting to run it for their own purposes, all you have to do after
-modifying `settings.py` is run it directly: `python rww_author.py`, which will
-run as a daemon.
+modifying `settings.py` is run it directly: `python rww_author.py`. Right now,
+this just runs in a while loop, so you should use it in screen or otherwise
+detach it if you don't want to leave the terminal open.
 
 License
 =======
